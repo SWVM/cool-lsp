@@ -140,20 +140,16 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 
 	// The validator creates diagnostics for all uppercase words length 2 and more
 	const text = textDocument.getText();
-	const pattern = /\b[A-Z]{2,}\b/g;
-	let m: RegExpExecArray | null;
-
-	let problems = 0;
 	const diagnostics: Diagnostic[] = [];
-	while ((m = pattern.exec(text)) && problems < settings.maxNumberOfProblems) {
-		problems++;
+
+	if (text.length > 10) {
 		const diagnostic: Diagnostic = {
 			severity: DiagnosticSeverity.Warning,
 			range: {
-				start: textDocument.positionAt(m.index),
-				end: textDocument.positionAt(m.index + m[0].length)
+				start: textDocument.positionAt(0),
+				end: textDocument.positionAt(10)
 			},
-			message: `${m[0]} is all uppercase.`,
+			message: `this! is place holder.`,
 			source: 'ex'
 		};
 		if (hasDiagnosticRelatedInformationCapability) {
@@ -163,14 +159,14 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 						uri: textDocument.uri,
 						range: Object.assign({}, diagnostic.range)
 					},
-					message: 'Spelling matters'
+					message: 'wauwa'
 				},
 				{
 					location: {
 						uri: textDocument.uri,
 						range: Object.assign({}, diagnostic.range)
 					},
-					message: 'Particularly for names'
+					message: 'awua'
 				}
 			];
 		}

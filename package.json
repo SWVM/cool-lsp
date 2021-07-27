@@ -17,10 +17,21 @@
 		"vscode": "^1.43.0"
 	},
 	"activationEvents": [
-		"onLanguage:plaintext"
+		"onLanguage:cool"
 	],
 	"main": "./client/out/extension",
 	"contributes": {
+		"languages": [{
+            "id": "cool",
+            "aliases": ["COOL", "cool"],
+            "extensions": [".cl"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "cool",
+            "scopeName": "source.cool",
+            "path": "./syntaxes/cool.tmLanguage.json"
+        }],
 		"configuration": {
 			"type": "object",
 			"title": "Example configuration",
