@@ -21,8 +21,9 @@ import {
 	TextDocument
 } from 'vscode-languageserver-textdocument';
 import { 
-	execSync
+	spawnSync
 } from 'child_process';
+import { cwd } from 'process';
 
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
@@ -144,10 +145,9 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 	// The validator creates diagnostics for all uppercase words length 2 and more
 	const text = textDocument.getText();
 	const diagnostics: Diagnostic[] = [];
-	
-	const child = execSync("python3 /Users/linhan/Documents/Git/cool-lsp/cool_py/Cool.py --type /Users/linhan/Documents/Git/cool-lsp/cool_py/tt.cl");
 
-	const tet = child.toString();
+	const child = spawnSync("python3", [cwd()+"/cool-lsp/cool_py/Cool.py"], { input: text}).stdout;
+	const err_msg = child.toString();
 
 	if (text.length > 10) {
 		const diagnostic: Diagnostic = {
@@ -166,14 +166,14 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 						uri: textDocument.uri,
 						range: Object.assign({}, diagnostic.range)
 					},
-					message: tet
+					message: err_msg
 				},
 				{
 					location: {
 						uri: textDocument.uri,
 						range: Object.assign({}, diagnostic.range)
 					},
-					message: 'awua'
+					message: "good"
 				}
 			];
 		}
