@@ -145,7 +145,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 	const text = textDocument.getText();
 	const diagnostics: Diagnostic[] = [];
 	
-	const child = execSync("echo $PWD");
+	const child = execSync("python3 /Users/linhan/Documents/Git/cool-lsp/cool_py/Cool.py --type /Users/linhan/Documents/Git/cool-lsp/cool_py/tt.cl");
 
 	const tet = child.toString();
 
