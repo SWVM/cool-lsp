@@ -20,6 +20,9 @@ import {
 import {
 	TextDocument
 } from 'vscode-languageserver-textdocument';
+import { 
+	execSync
+} from 'child_process';
 
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
@@ -141,6 +144,10 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 	// The validator creates diagnostics for all uppercase words length 2 and more
 	const text = textDocument.getText();
 	const diagnostics: Diagnostic[] = [];
+	
+	const child = execSync("echo $PWD");
+
+	const tet = child.toString();
 
 	if (text.length > 10) {
 		const diagnostic: Diagnostic = {
@@ -159,7 +166,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 						uri: textDocument.uri,
 						range: Object.assign({}, diagnostic.range)
 					},
-					message: 'wauwa'
+					message: tet
 				},
 				{
 					location: {
@@ -172,6 +179,8 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 		}
 		diagnostics.push(diagnostic);
 	}
+
+	
 
 	// Send the computed diagnostics to VSCode.
 	connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
