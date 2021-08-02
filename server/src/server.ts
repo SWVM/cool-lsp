@@ -147,7 +147,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 	const diagnostics: Diagnostic[] = [];
 
 	// spawn child process for compiler, and get error msg, if any
-	const child = spawnSync("python3", [cwd()+"/cool-lsp/cool_py/Cool.py"], { input: text}).stdout;
+	const child = spawnSync("python3", [__dirname+"/cool_py/Cool.py"], { input: text}).stdout;
 	const err_msg = child.toString();
 
 	if (err_msg.length > 1){
