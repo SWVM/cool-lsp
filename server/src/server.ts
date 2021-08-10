@@ -207,14 +207,100 @@ connection.onCompletion(
 		// info and always provide the same completion items.
 		return [
 			{
-				label: 'TypeScript',
+				label: 'case',
 				kind: CompletionItemKind.Text,
 				data: 1
 			},
 			{
-				label: 'JavaScript',
+				label: 'class',
 				kind: CompletionItemKind.Text,
-				data: 2
+				data: 1
+			},
+			{
+				label: 'else',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'equals',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'esac',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'false',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'fi',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'if',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'in',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'inherits',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'isvoid',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'loop',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'not',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'new',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'of',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'pool',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'then',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'true',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			
+			{
+				label: 'while',
+				kind: CompletionItemKind.Text,
+				data: 1
 			}
 		];
 	}
