@@ -145,12 +145,25 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 	// This modified version sends the source code to the COOL compiler for error checking
 	const text = textDocument.getText();
 	const diagnostics: Diagnostic[] = [];
+	let cool_location:string = "";
+
+	// match platform with corrusponding executable
+	if (process.platform == "win32"){
+		cool_location = __dirname + "/Cool_win/Cool";
+	}else if(process.platform == "darwin"){
+		cool_location = __dirname + "/Cool_mac/Cool";
+	}else{
+		connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+		return
+	}
+	
+	
 
 	// spawn child process for compiler, and get error msg, if any
-	const child = spawnSync("python3", [__dirname+"/cool_py/Cool.py"], { input: text}).stdout;
-	const err_msg = child.toString();
+	const child = spawnSync( cool_location, { input: text});
+	const err_msg = child.stdout.toString();
 
-	if (err_msg.length > 1){
+	if (err_msg.length){
 		const err_line		= parseInt(err_msg.substring(7)) - 1;	// convert to 0-based indexing
 		const pattern 	 	= /\n/g;
 		const newline_locs  = Array.from(("\n"+text+"\n").matchAll(pattern), x=>x.index);
